@@ -1,0 +1,18 @@
+.articleCont {
+    display: flex;
+    flex-wrap: wrap;
+}
+.articleDiv {
+    width: 400px;
+    height: 500px;
+    border: 1px black solid;
+    text-align: center;
+}
+.articleDiv img {
+    max-width: 200px;
+    display: block;
+    font-size: 10px;
+}
+.articleDiv a{
+    font-size: 10px;
+}
