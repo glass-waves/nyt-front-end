@@ -10,7 +10,7 @@ export default class Header extends Component {
                     <>
                         <NavLink to='/favorites'>My Favorites</NavLink>
                         <NavLink to='/search'>Search</NavLink>
-                        <button onClick={this.props.handleLogout}>Sign Out</button>
+                        <NavLink to='/signup' onClick={this.props.handleLogout}>Sign Out</NavLink>
                     </>    
                 }
                 {!this.props.token &&

@@ -13,16 +13,30 @@ import {
 } from 'react-router-dom';
 
 import React, { Component } from 'react'
+import { getTokenFromLocalStorage, storeTokenInLocalStorage } from './utils/local-storage-utils.js';
 
 export default class App extends Component {
     state = {
-        token: ''
+        token: getTokenFromLocalStorage()
+    }
+    handleToken = (token) => {
+        this.setState({
+            token
+        })
+        storeTokenInLocalStorage(token);
+    }
+    handleLogout = () => {
+        this.setState({
+            token: ''
+        })
+        storeTokenInLocalStorage();
     }
     render() {
+        console.log('app.js state:', this.state)
         return (
             <div>
                 <Router>
-                    <Header />
+                    <Header token={this.state.token} handleLogout={this.handleLogout} />
                     <Switch>
                         <Route
                             path="/"
@@ -47,7 +61,7 @@ export default class App extends Component {
                             path="/search"
                             exact
                             render={(props) => (
-                                <SearchPage {...props} handleToken={this.handleToken} />
+                                <SearchPage {...props} token={this.state.token} />
                             )}
                         />
                         <PrivateRoute
@@ -56,7 +70,7 @@ export default class App extends Component {
                             token={this.state.token}
                             render={(routerProps) =>
                                 <FavoritesPage
-                                    user={this.state.token}
+                                    token={this.state.token}
                                     {...routerProps}
                                 />}
                         />

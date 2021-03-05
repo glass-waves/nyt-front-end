@@ -1,7 +1,7 @@
 import request from "superagent"
 
 const URL = `https://api.nytimes.com/svc/search/v2/articlesearch.json`
-// const backURL = '';
+const backURL = 'http://localhost:3000';
 
 //get all articles
 
@@ -12,6 +12,32 @@ export async function getAllArticles() {
 }
 export async function getAllArticlesByKeyword(keyword) {
     const response = await request.get(`${URL}?api-key=${process.env.REACT_APP_NYT_API_KEY}&q=${keyword}`)
-
     return response.body.response.docs;
+}
+
+export async function getFavorites(token) {
+    const response = await request.get(`${backURL}/api/favorites`).set('Authorization', token);
+    return response.body;
+}
+
+export async function saveFavorite(favoriteObj, token) {
+    const response = await request.post(`${backURL}/api/favorites`).set('Authorization', token).send(favoriteObj);
+    return response.body;
+}
+export async function removeFavorite(_id, token) {
+    const response = await request.delete(`${backURL}/api/favorites/${_id}`).set('Authorization', token);
+    return response.body;
+}
+
+
+export async function signupUser(email, password) {
+    const response = await request.post(`${backURL}/auth/signup`).send({email, password});
+
+    return response.body;
+}
+
+export async function loginUser(email, password) {
+    const response = await request.post(`${backURL}/auth/signin`).send({email, password});
+
+    return response.body;
 }
