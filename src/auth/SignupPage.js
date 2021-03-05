@@ -21,6 +21,7 @@ export default class SignupPage extends Component {
         const user = await signupUser(this.state.email, this.state.password)
         const token = user.token;
         this.props.handleToken(token)
+        this.props.history.push('/search')
     }
     render() {
         return (

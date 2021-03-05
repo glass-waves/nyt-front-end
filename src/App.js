@@ -32,7 +32,6 @@ export default class App extends Component {
         storeTokenInLocalStorage();
     }
     render() {
-        console.log('app.js state:', this.state)
         return (
             <div>
                 <Router>

@@ -20,9 +20,9 @@ export default class FavoritesPage extends Component {
         })
     }
     render() {
-        console.log(this.state)
         return (
             <div>
+                {this.state.favorites.length === 0 && <p className="noFavs">No favorites to show yet!</p>}
                 {this.state.favorites.length > 0 && this.state.favorites.map(favorite => {
                     return <div className='articleDiv' key={favorite.id}>
                         <div>

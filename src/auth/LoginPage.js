@@ -19,9 +19,11 @@ export default class LoginPage extends Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault();
-        const user = await loginUser(this.state.email, this.state.password)
+        const user = await loginUser(this.state.email, this.state.password);
         const token = user.token;
-        this.props.handleToken(token)
+        this.props.handleToken(token);
+        this.props.history.push('/search')
+
     }
     render() {
         return (
